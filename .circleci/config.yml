@@ -49,16 +49,16 @@ jobs:
       - run:
           name: Build docker container
           command: |
-            docker build --tag=$DOCKER_IMAGE_NAME .
+            docker build --tag=${DOCKER_IMAGE_NAME} .
             docker image ls
 
       - run:
           name: Upload Docker to Dockerhub
           command: |
-            echo "Docker ID and Image: $DOCKER_IMAGE_NAME"
+            echo "Docker ID and Image: ${DOCKER_IMAGE_NAME}"
             docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
-            docker tag $DOCKER_IMAGE_NAME $DOCKERHUB_USERNAME/$DOCKER_IMAGE_NAME:$CIRCLE_WORKFLOW_ID
-            docker push $DOCKERHUB_USERNAME/$DOCKER_IMAGE_NAME:$CIRCLE_WORKFLOW_ID
+            docker tag ${DOCKER_IMAGE_NAME} $DOCKERHUB_USERNAME/${DOCKER_IMAGE_NAME}:$CIRCLE_WORKFLOW_ID
+            docker push $DOCKERHUB_USERNAME/${DOCKER_IMAGE_NAME}:$CIRCLE_WORKFLOW_ID
 
   deploy-infrastructure:
     docker:
@@ -132,7 +132,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "d4:2f:91:66:b5:0d:84:24:4a:09:2c:d6:8a:c1:0f:91"
+            - "59:ff:e3:8c:2e:5d:d4:df:32:f2:bd:64:2b:f3:49:dc"
       - attach_workspace:
           at: ~/
       - run:
@@ -159,7 +159,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "d4:2f:91:66:b5:0d:84:24:4a:09:2c:d6:8a:c1:0f:91"
+            - "59:ff:e3:8c:2e:5d:d4:df:32:f2:bd:64:2b:f3:49:dc"
       - attach_workspace:
           at: ~/
       - run:
@@ -209,7 +209,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "d4:2f:91:66:b5:0d:84:24:4a:09:2c:d6:8a:c1:0f:91"
+            - "59:ff:e3:8c:2e:5d:d4:df:32:f2:bd:64:2b:f3:49:dc"
       - attach_workspace:
           at: ~/
       - run:
@@ -233,11 +233,11 @@ workflows:
             - test-build
           filters:
             branches:
-              only: [ master ]
+              only: [ main ]
       - deploy-infrastructure:
           filters:
             branches:
-              only: [ master ]
+              only: [ main ]
       - configure-infrastructure:
           requires:
             - deploy-infrastructure
