@@ -49,16 +49,16 @@ jobs:
       - run:
           name: Build docker container
           command: |
-            docker build --tag=${DOCKER_IMAGE_NAME} .
+            docker build --tag=capstone .
             docker image ls
 
       - run:
           name: Upload Docker to Dockerhub
           command: |
-            echo "Docker ID and Image: ${DOCKER_IMAGE_NAME}"
+            echo "Docker ID and Image: capstone"
             docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
-            docker tag ${DOCKER_IMAGE_NAME} $DOCKERHUB_USERNAME/${DOCKER_IMAGE_NAME}:$CIRCLE_WORKFLOW_ID
-            docker push $DOCKERHUB_USERNAME/${DOCKER_IMAGE_NAME}:$CIRCLE_WORKFLOW_ID
+            docker tag capstone $DOCKERHUB_USERNAME/capstone:$CIRCLE_WORKFLOW_ID
+            docker push $DOCKERHUB_USERNAME/capstone:$CIRCLE_WORKFLOW_ID
 
   deploy-infrastructure:
     docker:
