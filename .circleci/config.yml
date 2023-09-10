@@ -73,8 +73,8 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file cloudformation/network.yml \
-              --tags project=${ENVIRONMENT_NAME}-project \
-              --stack-name "${ENVIRONMENT_NAME}-eks-network" \
+              --tags project=${capstone}-project \
+              --stack-name "${capstone}-eks-network" \
               --region ${AWS_DEFAULT_REGION} \
               --parameter-overrides file://cloudformation/network-parameters.json
       - run:
@@ -82,8 +82,8 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file cloudformation/cluster.yml \
-              --tags project=${ENVIRONMENT_NAME}-project \
-              --stack-name "${ENVIRONMENT_NAME}-eks-cluster" \
+              --tags project=${capstone}-project \
+              --stack-name "${capstone}-eks-cluster" \
               --region ${AWS_DEFAULT_REGION} \
               --parameter-overrides file://cloudformation/cluster-parameters.json \
               --capabilities CAPABILITY_NAMED_IAM
@@ -93,8 +93,8 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file cloudformation/nodegroup.yml \
-              --tags project=${ENVIRONMENT_NAME}-project \
-              --stack-name "${ENVIRONMENT_NAME}-eks-nodegroup" \
+              --tags project=${capstone}-project \
+              --stack-name "${capstone}-eks-nodegroup" \
               --region ${AWS_DEFAULT_REGION} \
               --parameter-overrides file://cloudformation/nodegroup-parameters.json \
               --capabilities CAPABILITY_NAMED_IAM
@@ -103,8 +103,8 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file cloudformation/management.yml \
-              --tags project=${ENVIRONMENT_NAME}-project \
-              --stack-name "${ENVIRONMENT_NAME}-eks-management" \
+              --tags project=${capstone}-project \
+              --stack-name "${capstone}-eks-management" \
               --region ${AWS_DEFAULT_REGION} \
               --parameter-overrides file://cloudformation/management-parameters.json \
               --output text >> ~/checkIfDeployed.txt
@@ -116,7 +116,7 @@ jobs:
             aws ec2 describe-instances \
               --region "${AWS_DEFAULT_REGION}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:Name,Values=${ENVIRONMENT_NAME}-management*" \
+              --filters "Name=tag:Name,Values=${capstone}-management*" \
               --output text >> ~/inventory.txt
             cat ~/inventory.txt
       - persist_to_workspace:
