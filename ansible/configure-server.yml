@@ -14,15 +14,15 @@
     - name: "wait 120 seconds" 
       wait_for_connection: 
         timeout: 120 
-    #- name: "Install software-properties-common" 
-    #  become: true 
-    #  raw: apt install software-properties-common -y 
-    #- name: "Add update ansible" 
-    #  become: true 
-    #  raw: add-apt-repository --yes --update ppa:ansible/ansible 
-    #- name: "Install ansible" 
-    #  become: true 
-    #  raw: apt install ansible -y
+    - name: "Install software-properties-common" 
+      become: true 
+      raw: apt install software-properties-common -y 
+    - name: "Add update ansible" 
+      become: true 
+      raw: add-apt-repository --yes --update ppa:ansible/ansible 
+    - name: "Install ansible" 
+      become: true 
+      raw: apt install ansible -y
     - name: "Install python for Ansible" 
       become: true 
       raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3)
