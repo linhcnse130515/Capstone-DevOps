@@ -16,8 +16,7 @@
         timeout: 30 
     - name: "Install python for Ansible" 
       become: true 
-      raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3) 
-      change_when: false 
+      raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3)
     - name: "Install 'unzip'" 
       apt: 
         name: [ "unzip" ] 
