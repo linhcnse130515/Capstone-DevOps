@@ -239,7 +239,7 @@ workflows:
       #    filters:
       #      branches:
       #        only: [ main ]
-      - configure-infrastructure:
+      - configure-infrastructure #:
       #    requires:
       #      - deploy-infrastructure
       - configure-cluster:
