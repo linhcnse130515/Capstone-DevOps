@@ -228,24 +228,24 @@ jobs:
 workflows:
   default:
     jobs:
-      - test-build
-      - upload-docker:
-          requires:
-            - test-build
-          filters:
-            branches:
-              only: [ main ]
-      - deploy-infrastructure:
-          filters:
-            branches:
-              only: [ main ]
+      #- test-build
+      #- upload-docker:
+      #    requires:
+      #      - test-build
+      #    filters:
+      #      branches:
+      #        only: [ main ]
+      #- deploy-infrastructure:
+      #    filters:
+      #      branches:
+      #        only: [ main ]
       - configure-infrastructure:
-          requires:
-            - deploy-infrastructure
+      #    requires:
+      #      - deploy-infrastructure
       - configure-cluster:
           requires:
             - configure-infrastructure
-            - upload-docker
+      #      - upload-docker
       - deploy-docker:
           requires:
             - configure-cluster
