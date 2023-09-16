@@ -33,7 +33,12 @@ jobs:
           paths:
             - ./.devops
           key: v1-dependencies-{{ checksum "app/requirements.txt" }}
-
+  deploy-infrastructure:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run: yum install -y tar gzip
       - run:
           name: build deployment
           command: |
@@ -46,6 +51,7 @@ jobs:
               --role-name eksClusterRole
               
             make k8s_deployment
+            
       # run lint!
       - run:
           name: run lint
