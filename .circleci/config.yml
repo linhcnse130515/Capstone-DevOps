@@ -26,17 +26,13 @@ jobs:
             python3 -m venv .devops
             source .devops/bin/activate
             make install
+            make minikube_start
+            make k8s_deployment
             # Install hadolint
       - save_cache:
           paths:
             - ./.devops
           key: v1-dependencies-{{ checksum "app/requirements.txt" }}
-
-      - run:
-          name: build deployment
-          command: |
-            make minikube_start
-            make k8s_deployment
       # run lint!
       - run:
           name: run lint
