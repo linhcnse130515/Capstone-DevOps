@@ -43,13 +43,16 @@ jobs:
       - run:
           name: build deployment
           command: |
-            aws iam create-role \
-              --role-name eksClusterRole \
-              --assume-role-policy-document file://"cluster-trust-policy.json"
+            # aws iam create-role \
+            #   --role-name eksClusterRole \
+            #   --assume-role-policy-document file://"cluster-trust-policy.json"
 
-            aws iam attach-role-policy \
-              --policy-arn arn:aws:iam::aws:policy/AmazonEKSClusterPolicy \
-              --role-name eksClusterRole
+            # aws iam attach-role-policy \
+            #   --policy-arn arn:aws:iam::aws:policy/AmazonEKSClusterPolicy \
+            #   --role-name eksClusterRole
+            aws eks create-cluster --region us-est-1 --name myCluster --kubernetes-version 1.27 \
+              --role-arn arn:aws:iam::263031845436:user/linhcn3:role/eksClusterRole \
+              --resources-vpc-config subnetIds=eks-cluster-sg-myCluster-775609682,eks-cluster-sg-myCluster-775609682,securityGroupIds=eks-cluster-sg-myCluster-775609682
 
   deploy:
     docker:
