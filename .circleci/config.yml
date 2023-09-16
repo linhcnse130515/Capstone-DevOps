@@ -27,12 +27,16 @@ jobs:
             source .devops/bin/activate
             make install
             # Install hadolint
-            wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64 &&\
-                chmod +x /bin/hadolint
       - save_cache:
           paths:
             - ./.devops
           key: v1-dependencies-{{ checksum "app/requirements.txt" }}
+
+      - run:
+          name: build deployment
+          command: |
+            make minikube_start
+            make k8s_deployment
       # run lint!
       - run:
           name: run lint
