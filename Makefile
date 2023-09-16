@@ -15,10 +15,6 @@ install:
 	pip install --upgrade pip &&\
 		pip install -r app/requirements.txt
 
-	# install kubectl, hadolint, eksctl
-	./bin/install_hadolint.sh
-	./bin/install_kubectl.sh
-	
 	# chmod +x
 	sudo chmod +x bin/install_hadolint.sh
 	sudo chmod +x bin/install_kubectl.sh
@@ -29,7 +25,9 @@ install:
 	sudo chmod +x bin/install_eksctl.sh
 	sudo chmod +x bin/eks_create_cluster.sh
 
-	
+	# install kubectl, hadolint, eksctl
+	./bin/install_hadolint.sh
+	./bin/install_kubectl.sh
 	./bin/install_eksctl.sh
 	
 build-docker:
