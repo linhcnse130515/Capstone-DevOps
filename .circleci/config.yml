@@ -33,7 +33,6 @@ jobs:
           paths:
             - ./.devops
           key: v1-dependencies-{{ checksum "app/requirements.txt" }}
-
       # run lint!
       - run:
           name: run lint
