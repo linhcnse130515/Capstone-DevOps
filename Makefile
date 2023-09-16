@@ -16,27 +16,19 @@ install:
 		pip install -r app/requirements.txt
 
 	# chmod +x
-	# sudo 
-	chmod +x bin/install_hadolint.sh
-	# sudo 
-	chmod +x bin/install_kubectl.sh
-	# sudo 
-	chmod +x bin/run_docker.sh
-	# sudo 
-	chmod +x bin/upload_docker.sh
-	# sudo 
-	chmod +x bin/k8s_deployment.sh
-	# sudo 
-	chmod +x bin/k8s_green_deployment.sh
-	# sudo 
-	chmod +x bin/install_eksctl.sh
-	# sudo 
-	chmod +x bin/eks_create_cluster.sh
+	# sudo chmod +x bin/install_hadolint.sh
+	# sudo chmod +x bin/install_kubectl.sh
+	# sudo chmod +x bin/run_docker.sh
+	# sudo chmod +x bin/upload_docker.sh
+	# sudo chmod +x bin/k8s_deployment.sh
+	# sudo chmod +x bin/k8s_green_deployment.sh
+	# sudo chmod +x bin/install_eksctl.sh
+	# sudo chmod +x bin/eks_create_cluster.sh
 
 	# install kubectl, hadolint, eksctl
-	./bin/install_hadolint.sh
-	./bin/install_kubectl.sh
-	./bin/install_eksctl.sh
+	# ./bin/install_hadolint.sh
+	# ./bin/install_kubectl.sh
+	# ./bin/install_eksctl.sh
 	
 build-docker:
 	./bin/run_docker.sh
