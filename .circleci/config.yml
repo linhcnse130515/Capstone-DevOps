@@ -33,12 +33,6 @@ jobs:
           paths:
             - ./.devops
           key: v1-dependencies-{{ checksum "app/requirements.txt" }}
-      # run lint!
-      - run:
-          name: run lint
-          command: |
-            source .devops/bin/activate
-            make lint 
 
   deploy-infrastructure:
     docker:
@@ -56,8 +50,41 @@ jobs:
             aws iam attach-role-policy \
               --policy-arn arn:aws:iam::aws:policy/AmazonEKSClusterPolicy \
               --role-name eksClusterRole
-              
+
+  deploy:
+    docker:
+      # Use the same Docker base as the project
+      - image: python:3.7.3-stretch
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "app/requirements.txt" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv .devops
+            source .devops/bin/activate
+            # make minikube_start
             make k8s_deployment
+            # Install hadolint
+      - save_cache:
+          paths:
+            - ./.devops
+          key: v1-dependencies-{{ checksum "app/requirements.txt" }}
+      # run lint!
+      - run:
+          name: run lint
+          command: |
+            source .devops/bin/activate
+            make lint 
 
 workflows:
   default:
@@ -65,4 +92,6 @@ workflows:
       - build
       - deploy-infrastructure:
           requires: [build]
+      - deploy:
+          requires: [deploy-infrastructure]
   
