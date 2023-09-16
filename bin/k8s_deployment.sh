@@ -10,8 +10,8 @@ echo "GET NODES..."
 kubectl get nodes
 
 ## Deploy an App from the Dockerhub to the Kubernetes Cluster
-kubectl apply -f k8s/app_deployment.yaml
-kubectl apply -f k8s/app_service.yaml
+kubectl apply -f k8s/app_deployment.yml
+kubectl apply -f k8s/app_service.yml
 
 ## See the status
 echo "GET PODS..."
