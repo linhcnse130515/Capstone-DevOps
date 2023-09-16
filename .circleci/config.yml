@@ -3,7 +3,7 @@
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
 version: 2
-jobs:
+commands:
   build:
     docker:
       # Use the same Docker base as the project
@@ -58,3 +58,10 @@ jobs:
               --role-name eksClusterRole
               
             make k8s_deployment
+workflows:
+  default:
+    jobs:
+      - build
+      - deploy-infrastructure:
+          requires: [build]
+  
