@@ -27,7 +27,7 @@ jobs:
             source .devops/bin/activate
             make install
             # make minikube_start
-            # make k8s_deployment
+            make k8s_deployment
             # Install hadolint
       - save_cache:
           paths:
@@ -90,8 +90,8 @@ workflows:
   default:
     jobs:
       - build
-      - deploy-infrastructure:
-          requires: [build]
-      - deploy:
-          requires: [deploy-infrastructure]
+      # - deploy-infrastructure:
+      #     requires: [build]
+      # - deploy:
+      #     requires: [deploy-infrastructure]
   
