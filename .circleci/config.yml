@@ -33,6 +33,13 @@ jobs:
           paths:
             - ./.devops
           key: v1-dependencies-{{ checksum "app/requirements.txt" }}
+      # run lint!
+      - run:
+          name: run lint
+          command: |
+            source .devops/bin/activate
+            make lint 
+
   deploy-infrastructure:
     docker:
       - image: amazon/aws-cli
@@ -51,10 +58,3 @@ jobs:
               --role-name eksClusterRole
               
             make k8s_deployment
-            
-      # run lint!
-      - run:
-          name: run lint
-          command: |
-            source .devops/bin/activate
-            make lint 
