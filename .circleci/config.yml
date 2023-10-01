@@ -75,7 +75,7 @@ jobs:
               --template-file cloudformation/network.yml \
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-network" \
-              --region us-east-1 \
+              --region ${AWS_DEFAULT_REGION} \
               --parameter-overrides file://cloudformation/network-parameters.json
       - run:
           name: Ensure EKS Cluster exists
@@ -84,7 +84,7 @@ jobs:
               --template-file cloudformation/cluster.yml \
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-cluster" \
-              --region us-east-1 \
+              --region ${AWS_DEFAULT_REGION} \
               --parameter-overrides file://cloudformation/cluster-parameters.json \
               --capabilities CAPABILITY_NAMED_IAM
           no_output_timeout: 15m
@@ -95,7 +95,7 @@ jobs:
               --template-file cloudformation/nodegroup.yml \
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-nodegroup" \
-              --region us-east-1 \
+              --region ${AWS_DEFAULT_REGION} \
               --parameter-overrides file://cloudformation/nodegroup-parameters.json \
               --capabilities CAPABILITY_NAMED_IAM
       - run:
@@ -105,7 +105,7 @@ jobs:
               --template-file cloudformation/management.yml \
               --tags project=${ENVIRONMENT_NAME}-project \
               --stack-name "${ENVIRONMENT_NAME}-eks-management" \
-              --region us-east-1 \
+              --region ${AWS_DEFAULT_REGION} \
               --parameter-overrides file://cloudformation/management-parameters.json \
               --output text >> ~/checkIfDeployed.txt
             cat ~/checkIfDeployed.txt
@@ -114,7 +114,7 @@ jobs:
           command: |
             echo [management] > ~/inventory.txt
             aws ec2 describe-instances \
-              --region "us-east-1" \
+              --region "${AWS_DEFAULT_REGION}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:Name,Values=${ENVIRONMENT_NAME}-management*" \
               --output text >> ~/inventory.txt
@@ -132,7 +132,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "59:ff:e3:8c:2e:5d:d4:df:32:f2:bd:64:2b:f3:49:dc"
+            - "2f:80:76:18:20:74:b8:a5:a5:b8:8f:45:7c:0a:f4:fc"
       - attach_workspace:
           at: ~/
       - run:
@@ -159,7 +159,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "59:ff:e3:8c:2e:5d:d4:df:32:f2:bd:64:2b:f3:49:dc"
+            - "2f:80:76:18:20:74:b8:a5:a5:b8:8f:45:7c:0a:f4:fc"
       - attach_workspace:
           at: ~/
       - run:
@@ -210,7 +210,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "59:ff:e3:8c:2e:5d:d4:df:32:f2:bd:64:2b:f3:49:dc"
+            - "2f:80:76:18:20:74:b8:a5:a5:b8:8f:45:7c:0a:f4:fc"
       - attach_workspace:
           at: ~/
       - run:
