@@ -234,11 +234,11 @@ workflows:
             - test-build
           filters:
             branches:
-              only: [ main ]
+              only: [ develop ]
       - deploy-infrastructure:
           filters:
             branches:
-              only: [ main ]
+              only: [ develop ]
       - configure-infrastructure:
           requires:
             - deploy-infrastructure
