@@ -16,25 +16,30 @@ install:
 		pip install -r app/requirements.txt
 
 	# chmod +x
-	sudo chmod +x bin/install_hadolint.sh
-	sudo chmod +x bin/install_kubectl.sh
-	sudo chmod +x bin/install_minikube.sh
-	sudo chmod +x bin/run_docker.sh
-	sudo chmod +x bin/upload_docker.sh
-	sudo chmod +x bin/k8s_deployment.sh
-	sudo chmod +x bin/k8s_green_deployment.sh
-	sudo chmod +x bin/install_eksctl.sh
-	sudo chmod +x bin/eks_create_cluster.sh
+	# sudo 
+	chmod +x bin/install_hadolint.sh
+	# sudo 
+	chmod +x bin/install_kubectl.sh
+	# sudo 
+	chmod +x bin/install_minikube.sh
+	# sudo 
+	chmod +x bin/run_docker.sh
+	# sudo 
+	chmod +x bin/upload_docker.sh
+	# sudo 
+	chmod +x bin/k8s_deployment.sh
+	# sudo 
+	chmod +x bin/k8s_green_deployment.sh
+	# sudo 
+	chmod +x bin/install_eksctl.sh
+	# sudo 
+	chmod +x bin/eks_create_cluster.sh
 
 	# install kubectl, hadolint, eksctl
 	./bin/install_hadolint.sh
 	./bin/install_kubectl.sh
 	./bin/install_eksctl.sh
 	./bin/install_minikube.sh
-
-resize:
-	sudo chmod +x bin/resize.sh
-	./bin/resize.sh
 	
 build_docker:
 	./bin/run_docker.sh
@@ -50,6 +55,13 @@ k8s_deployment:
 
 k8s_green_deployment:
 	./bin/k8s_green_deployment.sh
+	
+test:
+	# Additional, optional, tests could go here
+	# python -m pytest -vv --cov=myrepolib tests/*.py
+	# python -m pytest --nbval notebook.ipynb
+	sudo chmod +x make_test.sh
+	./make_test.sh
 
 lint:
 	# See local hadolint install instructions:   https://github.com/hadolint/hadolint
