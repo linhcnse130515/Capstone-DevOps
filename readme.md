@@ -1,5 +1,8 @@
 ## Udacity CloudDevOps Capstone.
-#GET_PASSES_THIS_REPO_UDACITY_PLEASE
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/linhcnse130515/Capstone-DevOps/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/linhcnse130515/Capstone-DevOps/tree/main)
+
+## Docker Hub
+https://hub.docker.com/repository/docker/linhcnse130515/capstone-devops/general
 
 ## Load Balencer Endpoint
 
